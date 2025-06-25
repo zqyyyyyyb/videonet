@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>可跳转章节的视频播放器</title>
+    <style>
+        .chapter-list {
+            margin: 20px 0;
+        }
+        .chapter-btn {
+            display: block;
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            background: #f0f0f0;
+            border: none;
+            text-align: left;
+        }
+        .chapter-btn:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <video id="myVideo" width="640" controls>
+        <source src=".venv/0-10V培训视频导出2.mp4" type="video/mp4">
+        您的浏览器不支持HTML5视频
+    </video>
+
+    <div class="chapter-list">
+        <h3>视频目录</h3>
+        <button class="chapter-btn" onclick="jumpTo(26)">00:26 基本介绍</button>
+        <button class="chapter-btn" onclick="jumpTo(548)">09:08 调光控制方式</button>
+        <button class="chapter-btn" onclick="jumpTo(994)">16:34 产品特点</button>
+        <button class="chapter-btn" onclick="jumpTo(1362)">22:42 常见问题以及解决方法</button>
+    </div>
+
+    <script>
+        function jumpTo(seconds) {
+            const video = document.getElementById("myVideo");
+            video.currentTime = seconds;
+            video.play();
+        }
+    </script>
+</body>
+</html>
