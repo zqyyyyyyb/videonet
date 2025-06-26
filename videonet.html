@@ -413,168 +413,191 @@
         </div>
     </div>
 
-    <!-- 全屏播放器 -->
-    <div id="fullscreen-player">
-        <div class="player-controls">
-            <div class="control-btn close-btn" onclick="closeFullscreenPlayer()">×</div>
-        </div>
-        <video id="fullscreen-video" controls></video>
-        <div id="chapter-panel">
-            <h3 id="current-video-title">视频章节</h3>
-            <div class="chapter-list" id="chapter-list"></div>
-        </div>
+   <!-- 全屏播放器 -->
+<div id="fullscreen-player">
+    <div class="player-controls">
+        <div class="control-btn close-btn" onclick="closeFullscreenPlayer()">×</div>
     </div>
+    <video id="fullscreen-video" controls></video>
+    <div id="chapter-panel">
+        <h3 id="current-video-title">视频章节</h3>
+        <div class="chapter-list" id="chapter-list"></div>
+    </div>
+</div>
 
-    <script>
-        // 控制变量
-        let hideTimeout;
-        let isPanelHovered = false;
-        const HIDE_DELAY = 2000; // 隐藏延迟时间(毫秒)
-        const TRIGGER_WIDTH = 100; // 触发区域宽度(像素)
+<script>
+    // 控制变量
+    let panelVisible = false;
+    let mouseInPanel = false;
+    let mouseInTriggerZone = false;
+    let hideTimer = null;
+    const TRIGGER_ZONE_WIDTH = 100; // 左侧触发区域宽度
+    const HIDE_DELAY = 1000; // 隐藏延迟时间(毫秒)
 
-        // 打开全屏播放器
-        function openFullscreenPlayer(videoSrc, chapters, title) {
-            const player = document.getElementById('fullscreen-player');
-            const video = document.getElementById('fullscreen-video');
-            const chapterList = document.getElementById('chapter-list');
-            const videoTitle = document.getElementById('current-video-title');
+    // 打开全屏播放器
+    function openFullscreenPlayer(videoSrc, chapters, title) {
+        const player = document.getElementById('fullscreen-player');
+        const video = document.getElementById('fullscreen-video');
+        const chapterList = document.getElementById('chapter-list');
+        const videoTitle = document.getElementById('current-video-title');
 
-            // 设置视频源和标题
-            video.src = videoSrc;
-            videoTitle.textContent = title || '视频章节';
+        // 设置视频源和标题
+        video.src = videoSrc;
+        videoTitle.textContent = title || '视频章节';
 
-            // 生成章节列表
-            chapterList.innerHTML = '';
-            chapters.forEach(chapter => {
-                const button = document.createElement('button');
-                button.className = 'chapter-btn';
-                button.textContent = chapter.title;
-                button.onclick = () => {
-                    video.currentTime = chapter.time;
-                    video.play();
-                    keepPanelVisible();
-                };
-                chapterList.appendChild(button);
-            });
+        // 生成章节列表
+        chapterList.innerHTML = '';
+        chapters.forEach(chapter => {
+            const button = document.createElement('button');
+            button.className = 'chapter-btn';
+            button.textContent = chapter.title;
+            button.onclick = () => {
+                video.currentTime = chapter.time;
+                video.play();
+                keepPanelVisible();
+            };
+            chapterList.appendChild(button);
+        });
 
-            // 显示播放器
-            player.style.display = 'block';
-            video.play();
+        // 显示播放器
+        player.style.display = 'block';
+        video.play();
 
-            // 禁止页面滚动
-            document.body.style.overflow = 'hidden';
+        // 禁止页面滚动
+        document.body.style.overflow = 'hidden';
 
-            // 初始化面板状态
-            setTimeout(() => {
-                showPanel();
-            }, 500);
+        // 初始化面板状态
+        setTimeout(() => {
+            showPanel();
+        }, 500);
 
-            // 添加事件监听
-            setupPlayerEvents();
-        }
+        // 添加事件监听
+        setupPlayerEvents();
+    }
 
-        // 关闭全屏播放器
-        function closeFullscreenPlayer() {
-            const player = document.getElementById('fullscreen-player');
-            const video = document.getElementById('fullscreen-video');
+    // 关闭全屏播放器
+    function closeFullscreenPlayer() {
+        const player = document.getElementById('fullscreen-player');
+        const video = document.getElementById('fullscreen-video');
 
-            // 停止视频
-            video.pause();
-            video.src = '';
+        // 停止视频
+        video.pause();
+        video.src = '';
 
-            // 隐藏播放器
-            player.style.display = 'none';
+        // 隐藏播放器
+        player.style.display = 'none';
 
-            // 恢复页面滚动
-            document.body.style.overflow = 'auto';
+        // 恢复页面滚动
+        document.body.style.overflow = 'auto';
 
-            // 移除事件监听
-            removePlayerEvents();
-        }
+        // 移除事件监听
+        removePlayerEvents();
+    }
 
-        // 显示章节面板
-        function showPanel() {
-            clearTimeout(hideTimeout);
+    // 显示面板
+    function showPanel() {
+        clearTimeout(hideTimer);
+        if (!panelVisible) {
             document.getElementById('chapter-panel').style.transform = 'translateX(0)';
+            panelVisible = true;
         }
+    }
 
-        // 隐藏章节面板(带延迟)
-        function hidePanel() {
-            if (!isPanelHovered) {
-                hideTimeout = setTimeout(() => {
-                    document.getElementById('chapter-panel').style.transform = 'translateX(-100%)';
-                }, HIDE_DELAY);
+    // 计划隐藏面板
+    function scheduleHidePanel() {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+            if (!mouseInPanel && panelVisible) {
+                document.getElementById('chapter-panel').style.transform = 'translateX(-100%)';
+                panelVisible = false;
             }
-        }
+        }, HIDE_DELAY);
+    }
 
-        // 保持面板可见
-        function keepPanelVisible() {
-            clearTimeout(hideTimeout);
+    // 保持面板可见
+    function keepPanelVisible() {
+        showPanel();
+    }
+
+    // 鼠标移动处理
+    function handleMouseMove(e) {
+        const x = e.clientX;
+        const inTriggerZone = x < TRIGGER_ZONE_WIDTH;
+
+        // 如果从非触发区进入触发区
+        if (!mouseInTriggerZone && inTriggerZone) {
             showPanel();
         }
-
-        // 设置播放器事件
-        function setupPlayerEvents() {
-            const player = document.getElementById('fullscreen-player');
-            const chapterPanel = document.getElementById('chapter-panel');
-
-            // 鼠标移动检测 - 显示/隐藏章节面板
-            player.addEventListener('mousemove', handleMouseMove);
-
-            // 鼠标进入面板区域
-            chapterPanel.addEventListener('mouseenter', () => {
-                isPanelHovered = true;
-                keepPanelVisible();
-            });
-
-            // 鼠标离开面板区域
-            chapterPanel.addEventListener('mouseleave', () => {
-                isPanelHovered = false;
-                hidePanel();
-            });
-
-            // 全屏状态变化检测
-            document.addEventListener('fullscreenchange', handleFullscreenChange);
-            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-            document.addEventListener('msfullscreenchange', handleFullscreenChange);
+        // 如果从触发区移出到非触发区，且不在面板内
+        else if (mouseInTriggerZone && !inTriggerZone && !mouseInPanel) {
+            scheduleHidePanel();
         }
 
-        // 移除播放器事件
-        function removePlayerEvents() {
-            const player = document.getElementById('fullscreen-player');
-            const chapterPanel = document.getElementById('chapter-panel');
+        mouseInTriggerZone = inTriggerZone;
+    }
 
-            player.removeEventListener('mousemove', handleMouseMove);
-            chapterPanel.removeEventListener('mouseenter');
-            chapterPanel.removeEventListener('mouseleave');
+    // 设置播放器事件
+    function setupPlayerEvents() {
+        const player = document.getElementById('fullscreen-player');
+        const chapterPanel = document.getElementById('chapter-panel');
 
-            document.removeEventListener('fullscreenchange', handleFullscreenChange);
-            document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-            document.removeEventListener('msfullscreenchange', handleFullscreenChange);
-        }
+        // 鼠标移动检测 - 显示/隐藏章节面板
+        player.addEventListener('mousemove', handleMouseMove);
 
-        // 鼠标移动处理
-        function handleMouseMove(e) {
-            const x = e.clientX;
+        // 鼠标进入面板区域
+        chapterPanel.addEventListener('mouseenter', () => {
+            mouseInPanel = true;
+            clearTimeout(hideTimer);
+        });
 
-            // 检测鼠标是否在左侧触发区域内
-            if (x < TRIGGER_WIDTH) {
+        // 鼠标离开面板区域
+        chapterPanel.addEventListener('mouseleave', () => {
+            mouseInPanel = false;
+            if (!mouseInTriggerZone) {
+                scheduleHidePanel();
+            }
+        });
+
+        // 全屏状态变化检测
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+        // 触摸设备支持
+        player.addEventListener('touchstart', (e) => {
+            const x = e.touches[0].clientX;
+            if (x < TRIGGER_ZONE_WIDTH) {
                 showPanel();
-            } else if (!isPanelHovered) {
-                hidePanel();
             }
-        }
+        });
+    }
 
-        // 全屏状态变化处理
-        function handleFullscreenChange() {
-            const isFullscreen = document.fullscreenElement ||
-                               document.webkitFullscreenElement ||
-                               document.msFullscreenElement;
+    // 移除播放器事件
+    function removePlayerEvents() {
+        const player = document.getElementById('fullscreen-player');
+        const chapterPanel = document.getElementById('chapter-panel');
 
-            if (!isFullscreen) {
-                closeFullscreenPlayer();
-            }
+        player.removeEventListener('mousemove', handleMouseMove);
+        chapterPanel.removeEventListener('mouseenter');
+        chapterPanel.removeEventListener('mouseleave');
+        player.removeEventListener('touchstart');
+
+        document.removeEventListener('fullscreenchange', handleFullscreenChange);
+        document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+    }
+
+    // 全屏状态变化处理
+    function handleFullscreenChange() {
+        const isFullscreen = document.fullscreenElement ||
+                           document.webkitFullscreenElement ||
+                           document.msFullscreenElement;
+
+        if (!isFullscreen) {
+            closeFullscreenPlayer();
         }
+    }
+</script>
     </script>
 </body>
 </html>
