@@ -137,7 +137,7 @@
             top: 0;
             height: 100%;
             width: 320px;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(100, 197, 255, 0.85);
             color: white;
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -155,28 +155,49 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .chapter-list {
-            margin-top: 15px;
+        /* 大章节样式 */
+        .chapter-section {
+            margin-bottom: 15px;
         }
 
-        .chapter-btn {
+        .section-title {
+            font-weight: bold;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .section-title:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* 小章节样式 */
+        .subchapter-list {
+            padding-left: 20px;
+        }
+
+        .subchapter-btn {
             display: block;
             width: 100%;
-            padding: 12px 15px;
-            margin: 8px 0;
+            padding: 10px 15px;
+            margin: 5px 0;
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             text-align: left;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
-        .chapter-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateX(5px);
+        .subchapter-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(3px);
         }
 
         /* 控制按钮 */
@@ -249,14 +270,44 @@
     </div>
 
     <div class="video-gallery">
-        <!-- 视频1 -->
+        <!-- 视频1 - 0/1-10V调光技术 -->
         <div class="video-item" onclick="openFullscreenPlayer(
-            'https://github.com/zqyyyyyyb/videonet/releases/download/0-10/0-10V.2.-.mp4',
+            'https://github.com/zqyyyyyyb/videonet/releases/download/0-10/new.0-10V.mp4',
             [
-                {time: 26, title: '00:26 基本介绍'},
-                {time: 548, title: '09:08 调光控制方式'},
-                {time: 994, title: '16:34 产品特点'},
-                {time: 1362, title: '22:42 常见问题及解决方法'}
+                {
+                    sectionTitle: '0/1-10V调光原理',
+                    sectionTime: 18,
+                    subchapters: [
+                        {time: 24, title: '00:24 有源调光和无源调光的区别'},
+                        {time: 140, title: '02:20 隔离和非隔离的区别'},
+                        {time: 201, title: '03:21 0/1-10V的调光原理及区别'},
+                        {time: 303, title: '05:03 0/1-10V的优缺点'},
+                        {time: 467, title: '07:47 0/1-10V调光与可控硅的区别'},
+                        {time: 532, title: '08:52 0/1-10V调光控制方式'}
+
+                    ]
+                },
+                {
+                    sectionTitle: '0/1-10V产品举例介绍',
+                    sectionTime: 981,
+                    subchapters: [
+                        {time: 992, title: '16:32 面板类产品介绍'},
+                        {time: 1068, title: '17:48 控制器类产品介绍'},
+                        {time: 1169, title: '19:29 转换器特点介绍'},
+                        {time: 1220, title: '20:20 恒压/恒流调光电源特点介绍'}
+                    ]
+                },
+                {
+                    sectionTitle: '常见问题及解决方法',
+                    sectionTime: 1346,
+                    subchapters: [
+                        {time: 1350, title: '22:30 信号线接线'},
+                        {time: 1383, title: '23:03 灯闪原因'},
+                        {time: 1470, title: '24:30 调光关不灭原因'},
+                        {time: 1491, title: '24:51 故障排查方法'}
+                    ]
+                }
+
             ],
             '0/1-10V调光技术'
         )">
@@ -270,14 +321,31 @@
             </div>
         </div>
 
-        <!-- 视频2 -->
+        <!-- 视频2 - DMX512控制协议 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video2.mp4',
             [
-                {time: 30, title: '00:30 DMX512简介'},
-                {time: 120, title: '02:00 协议结构'},
-                {time: 240, title: '04:00 实际应用'},
-                {time: 360, title: '06:00 案例分析'}
+                {
+                    sectionTitle: '协议基础',
+                    subchapters: [
+                        {time: 30, title: '00:30 DMX512简介'},
+                        {time: 120, title: '02:00 协议结构'}
+                    ]
+                },
+                {
+                    sectionTitle: '实际应用',
+                    subchapters: [
+                        {time: 240, title: '04:00 实际应用'},
+                        {time: 360, title: '06:00 案例分析'}
+                    ]
+                },
+                {
+                    sectionTitle: '高级配置',
+                    subchapters: [
+                        {time: 480, title: '08:00 高级配置'},
+                        {time: 600, title: '10:00 故障排查'}
+                    ]
+                }
             ],
             'DMX512控制协议'
         )">
@@ -286,19 +354,43 @@
             </div>
             <div class="video-info">
                 <div class="video-title">DMX512系列</div>
-                <div class="video-desc">我是简介</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-desc">灯光控制行业标准协议详解</div>
+                <span class="video-duration">22分钟</span>
             </div>
         </div>
 
-        <!-- 视频3 -->
+        <!-- 视频3 - DALI智能照明系统 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video3.mp4',
             [
-                {time: 45, title: '00:45 DALI系统组成'},
-                {time: 180, title: '03:00 地址分配'},
-                {time: 360, title: '06:00 场景设置'},
-                {time: 480, title: '08:00 故障排查'}
+                {
+                    sectionTitle: '系统介绍',
+                    subchapters: [
+                        {time: 45, title: '00:45 DALI系统组成'},
+                        {time: 90, title: '01:30 系统特点'}
+                    ]
+                },
+                {
+                    sectionTitle: '安装配置',
+                    subchapters: [
+                        {time: 180, title: '03:00 地址分配'},
+                        {time: 270, title: '04:30 系统配置'}
+                    ]
+                },
+                {
+                    sectionTitle: '场景控制',
+                    subchapters: [
+                        {time: 360, title: '06:00 场景设置'},
+                        {time: 450, title: '07:30 场景切换'}
+                    ]
+                },
+                {
+                    sectionTitle: '维护管理',
+                    subchapters: [
+                        {time: 480, title: '08:00 故障排查'},
+                        {time: 540, title: '09:00 系统维护'}
+                    ]
+                }
             ],
             'DALI智能照明系统'
         )">
@@ -308,17 +400,35 @@
             <div class="video-info">
                 <div class="video-title">DALI智能照明系统</div>
                 <div class="video-desc">数字可寻址照明接口全解析</div>
-                <span class="video-duration">1分钟</span>
+                <span class="video-duration">18分钟</span>
             </div>
         </div>
 
-        <!-- 视频4 -->
+        <!-- 视频4 - 无线照明控制系统 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video4.mp4',
             [
-                {time: 60, title: '01:00 无线协议对比'},
-                {time: 240, title: '04:00 Zigbee技术'},
-                {time: 420, title: '07:00 组网实战'}
+                {
+                    sectionTitle: '无线技术对比',
+                    subchapters: [
+                        {time: 60, title: '01:00 无线协议对比'},
+                        {time: 120, title: '02:00 技术选型'}
+                    ]
+                },
+                {
+                    sectionTitle: 'Zigbee技术',
+                    subchapters: [
+                        {time: 240, title: '04:00 Zigbee技术'},
+                        {time: 300, title: '05:00 网络拓扑'}
+                    ]
+                },
+                {
+                    sectionTitle: '实战应用',
+                    subchapters: [
+                        {time: 420, title: '07:00 组网实战'},
+                        {time: 480, title: '08:00 场景应用'}
+                    ]
+                }
             ],
             '无线照明控制系统'
         )">
@@ -327,277 +437,379 @@
             </div>
             <div class="video-info">
                 <div class="video-title">感应系列</div>
-                <div class="video-desc">感应技术详解</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-desc">无线感应技术详解</div>
+                <span class="video-duration">15分钟</span>
             </div>
         </div>
 
-        <!-- 视频5 -->
+        <!-- 视频5 - RF2.4G无线调光原理 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video5.mp4',
             [
-                {time: 30, title: '00:30 智能家居概述'},
-                {time: 180, title: '03:00 系统集成'},
-                {time: 360, title: '06:00 场景联动'}
+                {
+                    sectionTitle: '技术概述',
+                    subchapters: [
+                        {time: 30, title: '00:30 技术概述'},
+                        {time: 90, title: '01:30 工作原理'}
+                    ]
+                },
+                {
+                    sectionTitle: '系统集成',
+                    subchapters: [
+                        {time: 180, title: '03:00 系统集成'},
+                        {time: 240, title: '04:00 设备兼容性'}
+                    ]
+                },
+                {
+                    sectionTitle: '场景应用',
+                    subchapters: [
+                        {time: 360, title: '06:00 场景联动'},
+                        {time: 420, title: '07:00 实际案例'}
+                    ]
+                }
             ],
-            '智能家居照明集成'
+            'RF2.4G无线调光原理'
         )">
             <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/cc99ff/ffffff?text=SmartHome" alt="智能家居">
+                <img src="https://via.placeholder.com/800x450/cc99ff/ffffff?text=RF2.4G" alt="RF2.4G">
             </div>
             <div class="video-info">
                 <div class="video-title">RF2.4G无线调光原理</div>
-                <div class="video-desc">我也是简介</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-desc">2.4G无线调光技术详解</div>
+                <span class="video-duration">20分钟</span>
             </div>
         </div>
 
-        <!-- 视频6 -->
+        <!-- 视频6 - SPI技术 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video6.mp4',
             [
-                {time: 45, title: '00:45 节能原理'},
-                {time: 180, title: '03:00 LED技术'},
-                {time: 360, title: '06:00 能效计算'}
+                {
+                    sectionTitle: '基础原理',
+                    subchapters: [
+                        {time: 45, title: '00:45 节能原理'},
+                        {time: 90, title: '01:30 通信协议'}
+                    ]
+                },
+                {
+                    sectionTitle: 'LED技术',
+                    subchapters: [
+                        {time: 180, title: '03:00 LED技术'},
+                        {time: 240, title: '04:00 驱动方式'}
+                    ]
+                },
+                {
+                    sectionTitle: '能效管理',
+                    subchapters: [
+                        {time: 360, title: '06:00 能效计算'},
+                        {time: 420, title: '07:00 节能方案'}
+                    ]
+                }
             ],
-            '照明节能技术'
+            'SPI技术'
         )">
             <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/66cccc/ffffff?text=Energy" alt="节能技术">
+                <img src="https://via.placeholder.com/800x450/66cccc/ffffff?text=SPI" alt="SPI技术">
             </div>
             <div class="video-info">
-                <div class="video-title">SPI</div>
-                <div class="video-desc">简介3号</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-title">SPI通信技术</div>
+                <div class="video-desc">SPI在照明控制中的应用</div>
+                <span class="video-duration">16分钟</span>
             </div>
         </div>
 
-        <!-- 视频7 -->
+        <!-- 视频7 - 可控硅调光 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video7.mp4',
             [
-                {time: 60, title: '01:00 设计原则'},
-                {time: 240, title: '04:00 案例解析'},
-                {time: 420, title: '07:00 软件工具'}
+                {
+                    sectionTitle: '设计原则',
+                    subchapters: [
+                        {time: 60, title: '01:00 设计原则'},
+                        {time: 120, title: '02:00 电路设计'}
+                    ]
+                },
+                {
+                    sectionTitle: '案例解析',
+                    subchapters: [
+                        {time: 240, title: '04:00 案例解析'},
+                        {time: 300, title: '05:00 常见问题'}
+                    ]
+                },
+                {
+                    sectionTitle: '工具使用',
+                    subchapters: [
+                        {time: 420, title: '07:00 软件工具'},
+                        {time: 480, title: '08:00 调试技巧'}
+                    ]
+                }
             ],
-            '照明设计方案'
+            '可控硅调光'
         )">
             <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/ffcc66/ffffff?text=Design" alt="设计方案">
+                <img src="https://via.placeholder.com/800x450/ffcc66/ffffff?text=TRIAC" alt="可控硅">
             </div>
             <div class="video-info">
-                <div class="video-title">可控硅</div>
-                <div class="video-desc">简介4</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-title">可控硅调光技术</div>
+                <div class="video-desc">前沿/后沿切相调光原理</div>
+                <span class="video-duration">22分钟</span>
             </div>
         </div>
 
-        <!-- 视频8 -->
+        <!-- 视频8 - LED调光原理与产品培训 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'video8.mp4',
             [
-                {time: 30, title: '00:30 常见问题'},
-                {time: 120, title: '02:00 故障诊断'},
-                {time: 240, title: '04:00 解决方案'}
+                {
+                    sectionTitle: '常见问题',
+                    subchapters: [
+                        {time: 30, title: '00:30 常见问题'},
+                        {time: 60, title: '01:00 使用技巧'}
+                    ]
+                },
+                {
+                    sectionTitle: '故障诊断',
+                    subchapters: [
+                        {time: 120, title: '02:00 故障诊断'},
+                        {time: 180, title: '03:00 排查流程'}
+                    ]
+                },
+                {
+                    sectionTitle: '解决方案',
+                    subchapters: [
+                        {time: 240, title: '04:00 解决方案'},
+                        {time: 300, title: '05:00 预防措施'}
+                    ]
+                }
             ],
-            '照明系统维护'
+            'LED调光原理与产品培训'
         )">
             <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/6699cc/ffffff?text=Maintenance" alt="系统维护">
+                <img src="https://via.placeholder.com/800x450/6699cc/ffffff?text=LED" alt="LED调光">
             </div>
             <div class="video-info">
                 <div class="video-title">LED调光原理与产品培训</div>
-                <div class="video-desc">介绍总结篇</div>
-                <span class="video-duration">1分钟</span>
+                <div class="video-desc">LED驱动与调光技术全面解析</div>
+                <span class="video-duration">18分钟</span>
             </div>
         </div>
     </div>
 
-   <!-- 全屏播放器 -->
-<div id="fullscreen-player">
-    <div class="player-controls">
-        <div class="control-btn close-btn" onclick="closeFullscreenPlayer()">×</div>
+    <!-- 全屏播放器 -->
+    <div id="fullscreen-player">
+        <div class="player-controls">
+            <div class="control-btn close-btn" onclick="closeFullscreenPlayer()">×</div>
+        </div>
+        <video id="fullscreen-video" controls></video>
+        <div id="chapter-panel">
+            <h3 id="current-video-title">视频章节</h3>
+            <div class="chapter-list" id="chapter-list"></div>
+        </div>
     </div>
-    <video id="fullscreen-video" controls></video>
-    <div id="chapter-panel">
-        <h3 id="current-video-title">视频章节</h3>
-        <div class="chapter-list" id="chapter-list"></div>
-    </div>
-</div>
 
-<script>
-    // 控制变量
-    let panelVisible = false;
-    let mouseInPanel = false;
-    let mouseInTriggerZone = false;
-    let hideTimer = null;
-    const TRIGGER_ZONE_WIDTH = 100; // 左侧触发区域宽度
-    const HIDE_DELAY = 1000; // 隐藏延迟时间(毫秒)
+    <script>
+        // 控制变量
+        let panelVisible = false;
+        let mouseInPanel = false;
+        let mouseInTriggerZone = false;
+        let hideTimer = null;
+        const TRIGGER_ZONE_WIDTH = 100; // 左侧触发区域宽度
+        const HIDE_DELAY = 1000; // 隐藏延迟时间(毫秒)
 
-    // 打开全屏播放器
-    function openFullscreenPlayer(videoSrc, chapters, title) {
-        const player = document.getElementById('fullscreen-player');
-        const video = document.getElementById('fullscreen-video');
-        const chapterList = document.getElementById('chapter-list');
-        const videoTitle = document.getElementById('current-video-title');
+        // 打开全屏播放器
+        function openFullscreenPlayer(videoSrc, chapters, title) {
+            const player = document.getElementById('fullscreen-player');
+            const video = document.getElementById('fullscreen-video');
+            const chapterList = document.getElementById('chapter-list');
+            const videoTitle = document.getElementById('current-video-title');
+            const chapterPanel = document.getElementById('chapter-panel');
 
-        // 设置视频源和标题
-        video.src = videoSrc;
-        videoTitle.textContent = title || '视频章节';
+            // 设置视频源和标题
+            video.src = videoSrc;
+            videoTitle.textContent = title || '视频章节';
 
-        // 生成章节列表
-        chapterList.innerHTML = '';
-        chapters.forEach(chapter => {
-            const button = document.createElement('button');
-            button.className = 'chapter-btn';
-            button.textContent = chapter.title;
-            button.onclick = () => {
-                video.currentTime = chapter.time;
-                video.play();
-                keepPanelVisible();
-            };
-            chapterList.appendChild(button);
-        });
+            // 生成分级章节列表
+            chapterList.innerHTML = '';
+            chapters.forEach(section => {
+                // 创建大章节
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'chapter-section';
 
-        // 显示播放器
-        player.style.display = 'block';
-        video.play();
+                const sectionTitle = document.createElement('div');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = section.sectionTitle;
+                sectionTitle.onclick = () => {
+                    // 点击大章节跳转到第一个小章节
+                    const targetTime = typeof section.sectionTime === 'number'
+        ? section.sectionTime
+        : (section.subchapters && section.subchapters[0]?.time);
 
-        // 禁止页面滚动
-        document.body.style.overflow = 'hidden';
-
-        // 初始化面板状态
-        setTimeout(() => {
-            showPanel();
-        }, 500);
-
-        // 添加事件监听
-        setupPlayerEvents();
+    if (typeof targetTime === 'number' && targetTime >= 0) {
+        video.currentTime = targetTime;
+        video.play().catch(e => console.error('播放失败:', e));
+        keepPanelVisible();
     }
+                };
 
-    // 关闭全屏播放器
-    function closeFullscreenPlayer() {
-        const player = document.getElementById('fullscreen-player');
-        const video = document.getElementById('fullscreen-video');
+                // 创建小章节列表
+                const subchapterList = document.createElement('div');
+                subchapterList.className = 'subchapter-list';
 
-        // 停止视频
-        video.pause();
-        video.src = '';
+                section.subchapters.forEach(chapter => {
+                    const button = document.createElement('button');
+                    button.className = 'subchapter-btn';
+                    button.textContent = chapter.title;
+                    button.onclick = (e) => {
+                        e.stopPropagation(); // 防止事件冒泡
+                        video.currentTime = chapter.time;
+                        video.play();
+                        keepPanelVisible();
+                    };
+                    subchapterList.appendChild(button);
+                });
 
-        // 隐藏播放器
-        player.style.display = 'none';
+                sectionDiv.appendChild(sectionTitle);
+                sectionDiv.appendChild(subchapterList);
+                chapterList.appendChild(sectionDiv);
+            });
 
-        // 恢复页面滚动
-        document.body.style.overflow = 'auto';
+            // 显示播放器
+            player.style.display = 'block';
+            video.play();
 
-        // 移除事件监听
-        removePlayerEvents();
-    }
+            // 初始状态：面板关闭
+            chapterPanel.style.transform = 'translateX(-100%)';
+            panelVisible = false;
 
-    // 显示面板
-    function showPanel() {
-        clearTimeout(hideTimer);
-        if (!panelVisible) {
-            document.getElementById('chapter-panel').style.transform = 'translateX(0)';
-            panelVisible = true;
-        }
-    }
+            // 禁止页面滚动
+            document.body.style.overflow = 'hidden';
 
-    // 计划隐藏面板
-    function scheduleHidePanel() {
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => {
-            if (!mouseInPanel && panelVisible) {
-                document.getElementById('chapter-panel').style.transform = 'translateX(-100%)';
-                panelVisible = false;
-            }
-        }, HIDE_DELAY);
-    }
-
-    // 保持面板可见
-    function keepPanelVisible() {
-        showPanel();
-    }
-
-    // 鼠标移动处理
-    function handleMouseMove(e) {
-        const x = e.clientX;
-        const inTriggerZone = x < TRIGGER_ZONE_WIDTH;
-
-        // 如果从非触发区进入触发区
-        if (!mouseInTriggerZone && inTriggerZone) {
-            showPanel();
-        }
-        // 如果从触发区移出到非触发区，且不在面板内
-        else if (mouseInTriggerZone && !inTriggerZone && !mouseInPanel) {
-            scheduleHidePanel();
+            // 添加事件监听
+            setupPlayerEvents();
         }
 
-        mouseInTriggerZone = inTriggerZone;
-    }
+        // 关闭全屏播放器
+        function closeFullscreenPlayer() {
+            const player = document.getElementById('fullscreen-player');
+            const video = document.getElementById('fullscreen-video');
 
-    // 设置播放器事件
-    function setupPlayerEvents() {
-        const player = document.getElementById('fullscreen-player');
-        const chapterPanel = document.getElementById('chapter-panel');
+            // 停止视频
+            video.pause();
+            video.src = '';
 
-        // 鼠标移动检测 - 显示/隐藏章节面板
-        player.addEventListener('mousemove', handleMouseMove);
+            // 隐藏播放器
+            player.style.display = 'none';
 
-        // 鼠标进入面板区域
-        chapterPanel.addEventListener('mouseenter', () => {
-            mouseInPanel = true;
+            // 恢复页面滚动
+            document.body.style.overflow = 'auto';
+
+            // 移除事件监听
+            removePlayerEvents();
+        }
+
+        // 显示面板
+        function showPanel() {
             clearTimeout(hideTimer);
-        });
-
-        // 鼠标离开面板区域
-        chapterPanel.addEventListener('mouseleave', () => {
-            mouseInPanel = false;
-            if (!mouseInTriggerZone) {
-                scheduleHidePanel();
+            if (!panelVisible) {
+                document.getElementById('chapter-panel').style.transform = 'translateX(0)';
+                panelVisible = true;
             }
-        });
+        }
 
-        // 全屏状态变化检测
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+        // 计划隐藏面板
+        function scheduleHidePanel() {
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                if (!mouseInPanel && panelVisible) {
+                    document.getElementById('chapter-panel').style.transform = 'translateX(-100%)';
+                    panelVisible = false;
+                }
+            }, HIDE_DELAY);
+        }
 
-        // 触摸设备支持
-        player.addEventListener('touchstart', (e) => {
-            const x = e.touches[0].clientX;
-            if (x < TRIGGER_ZONE_WIDTH) {
+        // 保持面板可见
+        function keepPanelVisible() {
+            showPanel();
+        }
+
+        // 鼠标移动处理
+        function handleMouseMove(e) {
+            const x = e.clientX;
+            const inTriggerZone = x < TRIGGER_ZONE_WIDTH;
+
+            // 如果从非触发区进入触发区
+            if (!mouseInTriggerZone && inTriggerZone) {
                 showPanel();
             }
-        });
-    }
+            // 如果从触发区移出到非触发区，且不在面板内
+            else if (mouseInTriggerZone && !inTriggerZone && !mouseInPanel) {
+                scheduleHidePanel();
+            }
 
-    // 移除播放器事件
-    function removePlayerEvents() {
-        const player = document.getElementById('fullscreen-player');
-        const chapterPanel = document.getElementById('chapter-panel');
-
-        player.removeEventListener('mousemove', handleMouseMove);
-        chapterPanel.removeEventListener('mouseenter');
-        chapterPanel.removeEventListener('mouseleave');
-        player.removeEventListener('touchstart');
-
-        document.removeEventListener('fullscreenchange', handleFullscreenChange);
-        document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.removeEventListener('msfullscreenchange', handleFullscreenChange);
-    }
-
-    // 全屏状态变化处理
-    function handleFullscreenChange() {
-        const isFullscreen = document.fullscreenElement ||
-                           document.webkitFullscreenElement ||
-                           document.msFullscreenElement;
-
-        if (!isFullscreen) {
-            closeFullscreenPlayer();
+            mouseInTriggerZone = inTriggerZone;
         }
-    }
-</script>
+
+        // 设置播放器事件
+        function setupPlayerEvents() {
+            const player = document.getElementById('fullscreen-player');
+            const chapterPanel = document.getElementById('chapter-panel');
+
+            // 鼠标移动检测 - 显示/隐藏章节面板
+            player.addEventListener('mousemove', handleMouseMove);
+
+            // 鼠标进入面板区域
+            chapterPanel.addEventListener('mouseenter', () => {
+                mouseInPanel = true;
+                clearTimeout(hideTimer);
+            });
+
+            // 鼠标离开面板区域
+            chapterPanel.addEventListener('mouseleave', () => {
+                mouseInPanel = false;
+                if (!mouseInTriggerZone) {
+                    scheduleHidePanel();
+                }
+            });
+
+            // 全屏状态变化检测
+            document.addEventListener('fullscreenchange', handleFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+            // 触摸设备支持
+            player.addEventListener('touchstart', (e) => {
+                const x = e.touches[0].clientX;
+                if (x < TRIGGER_ZONE_WIDTH) {
+                    showPanel();
+                }
+            });
+        }
+
+        // 移除播放器事件
+        function removePlayerEvents() {
+            const player = document.getElementById('fullscreen-player');
+            const chapterPanel = document.getElementById('chapter-panel');
+
+            player.removeEventListener('mousemove', handleMouseMove);
+            chapterPanel.removeEventListener('mouseenter');
+            chapterPanel.removeEventListener('mouseleave');
+            player.removeEventListener('touchstart');
+
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+        }
+
+        // 全屏状态变化处理
+        function handleFullscreenChange() {
+            const isFullscreen = document.fullscreenElement ||
+                               document.webkitFullscreenElement ||
+                               document.msFullscreenElement;
+
+            if (!isFullscreen) {
+                closeFullscreenPlayer();
+            }
+        }
     </script>
 </body>
 </html>
