@@ -270,6 +270,43 @@
     </div>
 
     <div class="video-gallery">
+        <!-- 视频8 - LED调光原理与产品培训 -->
+        <div class="video-item" onclick="openFullscreenPlayer(
+            'video8.mp4',
+            [
+                {
+                    sectionTitle: '常见问题',
+                    subchapters: [
+                        {time: 30, title: '00:30 常见问题'},
+                        {time: 60, title: '01:00 使用技巧'}
+                    ]
+                },
+                {
+                    sectionTitle: '故障诊断',
+                    subchapters: [
+                        {time: 120, title: '02:00 故障诊断'},
+                        {time: 180, title: '03:00 排查流程'}
+                    ]
+                },
+                {
+                    sectionTitle: '解决方案',
+                    subchapters: [
+                        {time: 240, title: '04:00 解决方案'},
+                        {time: 300, title: '05:00 预防措施'}
+                    ]
+                }
+            ],
+            'LED调光原理与产品培训'
+        )">
+            <div class="video-cover">
+                <img src="https://via.placeholder.com/800x450/6699cc/ffffff?text=LED" alt="LED调光">
+            </div>
+            <div class="video-info">
+                <div class="video-title">LED调光原理与产品培训</div>
+                <div class="video-desc">LED驱动与调光技术全面解析</div>
+                <span class="video-duration">18分钟</span>
+            </div>
+        </div>
         <!-- 视频1 - 0/1-10V调光技术 -->
         <div class="video-item" onclick="openFullscreenPlayer(
             'https://github.com/zqyyyyyyb/videonet/releases/download/0-10/new.0-10V.mp4',
@@ -318,6 +355,66 @@
                 <div class="video-title">0/1-10V调光技术</div>
                 <div class="video-desc">详细介绍0/1-10V调光原理和常见问题解决方法</div>
                 <span class="video-duration">26分钟</span>
+            </div>
+        </div>
+
+        <!-- 视频5 - RF2.4G无线调光原理 -->
+        <div class="video-item" onclick="openFullscreenPlayer(
+            'https://github.com/zqyyyyyyb/videonet/releases/download/0-10/RF2.4G.mp4',
+            [
+                {
+                    sectionTitle: '认识RF2.4G信号',
+                    sectionTime: 11,
+                    subchapters: [
+                        {time: 15, title: '00:15 RF2.4G介绍'},
+                        {time: 139, title: '02:19 WIFI协议'},
+                        {time: 191, title: '03:11 蓝牙协议'},
+                        {time: 225, title: '03:45 ZigBee协议'},
+                        {time: 273, title: '04:33 四大通信技术的区别'},
+                        {time: 325, title: '05:25 四大通信的调光方式'},
+                        {time: 367, title: '06:07 RF2.4G应用场景'}
+                    ]
+                },
+                {
+                    sectionTitle: '景晴 RF2.4G 无线系列产品控制方式',
+                    sectionTime: 406,
+                    subchapters: [
+                        {time: 411, title: '06:51 遥控器控制功能'},
+                        {time: 697, title: '11:37 旋钮/触摸面板控制方式'},
+                        {time: 739, title: '12:19 手机APP控制方法'}
+                    ]
+                },
+                {
+                    sectionTitle: '景晴 RF2.4G 无线系列产品',
+                    sectionTime: 764,
+                    subchapters: [
+                        {time: 849, title: '14:09 RF2.4G 无线调光面板系列'},
+                        {time: 903, title: '15:03 RF2.4G 无线调光恒压控制器系列'},
+                        {time: 952, title: '15:52 RF2.4G 无线调光恒流控制器系列'},
+                        {time: 984, title: '16:24 RF2.4G 调光电源系列'},
+                        {time: 1024, title: '17:04 WIFI & RF2.4G LED控制器'},
+                        {time: 1082, title: '18:02 ZigBee & RF2.4G LED控制器'},
+                        {time: 1181, title: '19:41 蓝牙 & RF2.4G LED控制器'},
+                    ]
+                },
+                {
+                    sectionTitle: 'RF2.4G 无线系列产品安装注意事项',
+                    sectionTime: 1273,
+                    subchapters: [
+
+                    ]
+                },
+
+            ],
+            'RF2.4G无线调光原理'
+        )">
+            <div class="video-cover">
+                <img src="https://github.com/zqyyyyyyb/videonet/releases/download/0-10/RF2.4G.cover.png" alt="RF2.4G">
+            </div>
+            <div class="video-info">
+                <div class="video-title">RF2.4G无线调光原理</div>
+                <div class="video-desc">2.4G无线调光技术详解</div>
+                <span class="video-duration">27分钟</span>
             </div>
         </div>
 
@@ -442,43 +539,7 @@
             </div>
         </div>
 
-        <!-- 视频5 - RF2.4G无线调光原理 -->
-        <div class="video-item" onclick="openFullscreenPlayer(
-            'video5.mp4',
-            [
-                {
-                    sectionTitle: '技术概述',
-                    subchapters: [
-                        {time: 30, title: '00:30 技术概述'},
-                        {time: 90, title: '01:30 工作原理'}
-                    ]
-                },
-                {
-                    sectionTitle: '系统集成',
-                    subchapters: [
-                        {time: 180, title: '03:00 系统集成'},
-                        {time: 240, title: '04:00 设备兼容性'}
-                    ]
-                },
-                {
-                    sectionTitle: '场景应用',
-                    subchapters: [
-                        {time: 360, title: '06:00 场景联动'},
-                        {time: 420, title: '07:00 实际案例'}
-                    ]
-                }
-            ],
-            'RF2.4G无线调光原理'
-        )">
-            <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/cc99ff/ffffff?text=RF2.4G" alt="RF2.4G">
-            </div>
-            <div class="video-info">
-                <div class="video-title">RF2.4G无线调光原理</div>
-                <div class="video-desc">2.4G无线调光技术详解</div>
-                <span class="video-duration">20分钟</span>
-            </div>
-        </div>
+
 
         <!-- 视频6 - SPI技术 -->
         <div class="video-item" onclick="openFullscreenPlayer(
@@ -556,43 +617,7 @@
             </div>
         </div>
 
-        <!-- 视频8 - LED调光原理与产品培训 -->
-        <div class="video-item" onclick="openFullscreenPlayer(
-            'video8.mp4',
-            [
-                {
-                    sectionTitle: '常见问题',
-                    subchapters: [
-                        {time: 30, title: '00:30 常见问题'},
-                        {time: 60, title: '01:00 使用技巧'}
-                    ]
-                },
-                {
-                    sectionTitle: '故障诊断',
-                    subchapters: [
-                        {time: 120, title: '02:00 故障诊断'},
-                        {time: 180, title: '03:00 排查流程'}
-                    ]
-                },
-                {
-                    sectionTitle: '解决方案',
-                    subchapters: [
-                        {time: 240, title: '04:00 解决方案'},
-                        {time: 300, title: '05:00 预防措施'}
-                    ]
-                }
-            ],
-            'LED调光原理与产品培训'
-        )">
-            <div class="video-cover">
-                <img src="https://via.placeholder.com/800x450/6699cc/ffffff?text=LED" alt="LED调光">
-            </div>
-            <div class="video-info">
-                <div class="video-title">LED调光原理与产品培训</div>
-                <div class="video-desc">LED驱动与调光技术全面解析</div>
-                <span class="video-duration">18分钟</span>
-            </div>
-        </div>
+
     </div>
 
     <!-- 全屏播放器 -->
@@ -734,20 +759,25 @@
 
         // 鼠标移动处理
         function handleMouseMove(e) {
-            const x = e.clientX;
-            const inTriggerZone = x < TRIGGER_ZONE_WIDTH;
+    const x = e.clientX;
+    const y = e.clientY;
+    const windowHeight = window.innerHeight;
+    const excludeBottomHeight = 300; // 底部排除 300px 的区域
 
-            // 如果从非触发区进入触发区
-            if (!mouseInTriggerZone && inTriggerZone) {
-                showPanel();
-            }
-            // 如果从触发区移出到非触发区，且不在面板内
-            else if (mouseInTriggerZone && !inTriggerZone && !mouseInPanel) {
-                scheduleHidePanel();
-            }
+    // 判断是否在触发区域内（左侧且不在底部）
+    const inTriggerZone = x < TRIGGER_ZONE_WIDTH && y < (windowHeight - excludeBottomHeight);
 
-            mouseInTriggerZone = inTriggerZone;
-        }
+    // 如果从非触发区进入触发区
+    if (!mouseInTriggerZone && inTriggerZone) {
+        showPanel();
+    }
+    // 如果从触发区移出到非触发区，且不在面板内
+    else if (mouseInTriggerZone && !inTriggerZone && !mouseInPanel) {
+        scheduleHidePanel();
+    }
+
+    mouseInTriggerZone = inTriggerZone;
+}
 
         // 设置播放器事件
         function setupPlayerEvents() {
